@@ -26,6 +26,10 @@ BasicGame.Preloader.prototype = {
 		//	As this is just a Project Template I've not provided these assets, swap them for your own.
 		this.load.image('titlepage', 'assets/images/main_menu.png');
 		this.load.atlas('buttons', 'assets/buttons/startButton.png', 'assets/buttons/startButton.json');
+
+		this.load.atlas('tanks', 'assets/images/Tanks.png', 'assets/images/Tanks.json');
+		this.load.tilemap('testMap', 'assets/tilemaps/testLevel.json', null, Phaser.Tilemap.TILED_JSON);
+		this.load.image('grass', 'assets/images/coldwatergrass.png');
 		//this.load.audio('titleMusic', ['audio/main_menu.mp3']);
 		//this.load.bitmapFont('carrier_command', 'fonts/bitmapFonts/carrier_command.png', 'fonts/bitmapFonts/carrier_command.xml');
 		//	+ lots of other required assets here
@@ -55,7 +59,7 @@ BasicGame.Preloader.prototype = {
 		if (this.ready == false)
 		{
 			this.ready = true;
-			this.state.start('MainMenu');
+			this.state.start('Game');
 		}
 
 

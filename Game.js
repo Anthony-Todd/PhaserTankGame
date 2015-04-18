@@ -30,7 +30,23 @@ BasicGame.Game.prototype = {
     create: function () {
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+
+        //  Because we're loading CSV map data we have to specify the tile size here or we can't render it
+        this.map = this.add.tilemap('testMap', 10, 10);
+
+        //  Now add in the tileset
+        this.map.addTilesetImage('grass');
+        //this.map.addTilesetImage('grass');
+        //  Create our layer
+        this.layer = this.map.createLayer('test_0');
+
+        //  Resize the world
+        this.layer.resizeWorld();
+
+        this.cursors = this.input.keyboard.createCursorKeys();
+
         this.playButton = this.add.button(8, 8, 'buttons', this.quitGame, this, 'quit_over', 'quit_normal', 'quit_pressed');
+        this.playButton.fixedToCamera = true;
 
     },
 
@@ -38,6 +54,25 @@ BasicGame.Game.prototype = {
 
         //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
 
+        if (this.cursors.left.isDown)
+        {
+            this.camera.x -= 4;
+        }
+        else if (this.cursors.right.isDown)
+        {
+            this.camera.x += 4;
+        }
+
+        if (this.cursors.up.isDown)
+        {
+            this.camera.y -= 4;
+        }
+        else if (this.cursors.down.isDown)
+        {
+            this.camera.y += 4;
+        }
+
+        this.camera.update();
     },
 
     quitGame: function (pointer) {
