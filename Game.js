@@ -23,6 +23,10 @@ BasicGame.Game = function (game) {
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
+    this.map;
+    this.background;
+
+    this.playerTank;
 };
 
 BasicGame.Game.prototype = {
@@ -36,14 +40,24 @@ BasicGame.Game.prototype = {
 
         //  Now add in the tileset
         this.map.addTilesetImage('grass');
-        //this.map.addTilesetImage('grass');
-        //  Create our layer
-        this.layer = this.map.createLayer('test_0');
+        //this.map.addTilesetImage('grass');  
+        //  Create our.background
+        this.background = this.map.createLayer('test_0');
 
         //  Resize the world
-        this.layer.resizeWorld();
+        this.background.resizeWorld();
 
         this.cursors = this.input.keyboard.createCursorKeys();
+
+
+        this.playerTank = this.game.add.group();
+        var body = this.playerTank.create(0,0,'tanks','tankBlue.png',true);
+        body.anchor.setTo(0.5, 0.5);
+        var barrel = this.playerTank.create(-8,0,'tanks','barrelBlue.png',true);
+        body.anchor.setTo(0.5, 0.0);
+
+        this.playerTank.position.setTo(64,64);
+        this.playerTank.scale.setTo(0.5, 0.5);
 
         this.playButton = this.add.button(8, 8, 'buttons', this.quitGame, this, 'quit_over', 'quit_normal', 'quit_pressed');
         this.playButton.fixedToCamera = true;
